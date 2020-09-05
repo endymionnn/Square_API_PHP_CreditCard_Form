@@ -68,6 +68,10 @@ $request_body = array (
 # a 200-level HTTP code. This block catches any exceptions that occur from the request.
 try {
   $result = $payments_api->createPayment($request_body);
+  
+  # to array
+  $result = json_decode(json_encode(\SquareConnect\ObjectSerializer::sanitizeForSerialization($result)), true);
+  
   echo "<pre>";
   print_r($result);
   echo "</pre>";
